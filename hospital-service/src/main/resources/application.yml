@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: hospital-service
+server:
+  port: 2020
+
+  
+  
