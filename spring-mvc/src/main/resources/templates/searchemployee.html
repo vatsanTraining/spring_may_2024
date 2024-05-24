@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Seach Employee</title>
+	</head>
+	<body>
+		
+		
+				<h1 th:text="${heading}"></h1>
+
+
+<form th:action="srchByDept">
+
+<label>Department to Search</label>
+<input id="keyword" type="search" name="dept" th:value="${dept}">
+<button type="submit" >Search</button>
+</form>
+
+		
+	</body>
+</html>
+
+
+
+
+
+
