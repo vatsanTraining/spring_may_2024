@@ -6,13 +6,27 @@
 	</head>
 	<body>
 		
-		<form action="#" th:action="submit" th:object="${command}" method="post">
+		<form action="#" th:action="tasks" th:object="${command}" method="post">
 			
-<input type="text" th:field="*{id}" />
+		 <label>Id</label>	
+		<input type="text" th:field="*{id}" />
+
+		 <label>Task</label>	
     
+		<input type="text" th:field="*{task}" />
+
+		 <label>Assigned To</label>	
+
+		<input type="text" th:field="*{assingedTo}" />
+		
+		
+				 <label>CompletionDate</label>	
+
+
+		<input type="date" th:field="*{completionDate}" />
     
         
-<input type="submit" value="Submit" /> 
+      <input type="submit" value="Submit" /> 
 </form>
 
 		

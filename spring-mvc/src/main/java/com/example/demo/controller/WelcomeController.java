@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.EmployeeService;
@@ -22,11 +24,15 @@ public class WelcomeController {
 
 	private EmployeeService service;
 	private TaskService taskService;
+	private ModelAndView mdlview;
+	private Task task;
 	
-	public WelcomeController(EmployeeService service,TaskService taskService) {
+	public WelcomeController(EmployeeService service,TaskService taskService,ModelAndView mdlview,Task task) {
 		
 		this.service = service;
 		this.taskService=taskService;
+		this.mdlview = mdlview;
+		this.task=task;
 	}
 	
 	//@RequestMapping(path = "/",method = RequestMethod.GET)
@@ -56,6 +62,18 @@ public class WelcomeController {
 		return "showemployee";
 	}
 	
+	@GetMapping(path = "/addtask")
+	public ModelAndView initTaskPage(){
+		
+		mdlview.addObject("command", task);
+		mdlview.setViewName("addtask");
+		
+		return mdlview;
+		
+
+	}
+	
+	
 	@GetMapping(path = "/tasks")
 	public String getTasks(Model model){
 		
@@ -68,13 +86,15 @@ public class WelcomeController {
 	}
 	
 	@PostMapping(path = "/tasks")
-	public String addTask(Model model ,Task entity){
+	public String addTask(@ModelAttribute("value") Task entity){
+		
 		
 		
 		Task response = taskService.save(entity);
 		
 		
-		return "showtask";
+		
+		return "success";
 	}
 	
 	
