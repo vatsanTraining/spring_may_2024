@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Product;
 import com.example.demo.entity.ifaces.ProductRepository;
+import com.example.demo.exceptions.ElementNotFoundException;
 
 @Service
 public class ProductService {
@@ -21,7 +22,7 @@ public class ProductService {
 	
 	public Product getProductById(long id) {
 		
-		return this.repo.findById(id).orElseThrow(() -> new RuntimeException("Element With given "+id+"Not found") );
+		return this.repo.findById(id).orElseThrow(() -> new ElementNotFoundException("Element With given "+id+" Not found") );
 	}
 	
 	
