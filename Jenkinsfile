@@ -1,40 +1,20 @@
 pipeline {
-environment {
-registry = "vatsank/example-jenkins-build:1.0"
-registryCredential = 'vatsank'
-dockerImage = ''
-}
-agent any
-stages {
-stage('Cloning our Git') {
-steps {
-git 'https://github.com/vatsanTraining/spring_may_2024'
-}
-}
-stage('Building our image') {
-steps{
-script {
-dockerImage = docker.build registry + ":$BUILD_NUMBER"
-}
-}
-}
-stage('Deploy our image') {
-steps{
-script {
-docker.withRegistry( '', registryCredential ) {
-dockerImage.push()
-}
-}
-}
-}
-stage('Cleaning up') {
-steps{
-sh "docker rmi $registry:$BUILD_NUMBER"
-}
-}
-}
-}
+    agent any
 
+    tools {
+        maven "maven"
+    }
 
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/vatsanTraining/spring_may_2024'
 
+                sh "mvn -f "/Users/srivatsan/.jenkins/workspace/test/pom.xml" -Dmaven.test.failure.ignore=true clean package"
 
+            }
+
+            
+        }
+    }
+}
