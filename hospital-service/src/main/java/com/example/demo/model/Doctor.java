@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component("doc")
+
+
 public class Doctor {
 	
 	private int doctorId;
