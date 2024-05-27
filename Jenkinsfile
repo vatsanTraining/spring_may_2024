@@ -17,7 +17,7 @@ pipeline {
                     stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build --tag vatsank/example-jenkins-build:1.0 .'
+                    sh 'docker build -t vatsank/example-jenkins-build:1.0 .'
                 }
             }
         }
