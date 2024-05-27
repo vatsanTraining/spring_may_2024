@@ -40,6 +40,13 @@ public class EmployeeController {
 		
 	}
 	
+	@GetMapping(path = "/{id}")
+	Employee findById(@PathVariable("id") int id){
+
+		return this.service.findById(id);
+		
+	}
+
 	
 	@PostMapping
 	ResponseEntity<Employee> save(@RequestBody Employee entity) {
@@ -55,7 +62,7 @@ public class EmployeeController {
 		
 	}
 	
-	@DeleteMapping
+	@DeleteMapping(path = "/{id}")
 	ResponseEntity<Employee> remove(@PathVariable("id") int id) {
 		
 		return ResponseEntity.status(200).body( this.service.remove(id));
