@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Product;
@@ -68,12 +69,16 @@ public class ProductService {
  
  public int updateRatePerUnit(long id,double revisedRate ){
 	   
-	   return this.updateRatePerUnit(id, revisedRate);
+	   return this.repo.updateRatePerUnit(id, revisedRate);
  }
 
 
  
-
+public List<Product>  getProductSorted(String sortProp) {
+	
+	 return this.repo.findAll(Sort.by(sortProp));
+			 
+}
    
    
 	

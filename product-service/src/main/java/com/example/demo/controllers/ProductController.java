@@ -18,6 +18,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.demo.entity.Product;
 import com.example.demo.services.ProductService;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping(path = "/api/v1/products")
 public class ProductController {
@@ -42,6 +47,11 @@ public class ProductController {
 		return this.service.getProductById(id);
 	}
 	
+	@GetMapping("/sort/{propName}")
+	public List<Product> getSortedList(@PathVariable("propName") String propName){
+		
+		return this.service.getProductSorted(propName);
+	}
 	@GetMapping("/srch/name/{name}")
 	public Product findByName(@PathVariable("name") String name){
 		
@@ -54,7 +64,8 @@ public class ProductController {
 		return this.service.getProductByRate(rpu);
 	}
 	
-	@PostMapping
+	@PostMapping(produces = "application/json",consumes = "application/json")
+	@ApiResponses(@ApiResponse(responseCode = "201",content =@Content(mediaType = "application/json")))
 	public ResponseEntity<Product> save(@RequestBody Product entity){
 		
 		Product saved = this.service.saveProduct(entity);
@@ -78,7 +89,7 @@ public class ProductController {
 	
 	
 	@PatchMapping("/{id}/{rpu}")
-	public ResponseEntity<Integer> update(long id , double rpu){
+	public ResponseEntity<Integer> update(@PathVariable long id ,@PathVariable  double rpu){
 		
 		var rowsUpdated = this.service.updateRatePerUnit(id, rpu);
 		

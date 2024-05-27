@@ -3,10 +3,13 @@ package com.example.demo.entity.ifaces;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.demo.entity.Product;
+
+import jakarta.transaction.Transactional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	
@@ -27,7 +30,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	
 	@Query(value = "update Product set ratePerUnit=:revisedValue where id=:srchId",nativeQuery = false)
-	int updateRatePerUnit(@Param("srchId") int id, @Param("revisedValue") double revisedValue);
+	@Modifying   //to indicate the query modifies the table instead of returning the rows
+	@Transactional  // queries are executed in a default transaction boundary for modifying query user 
+	// sets the transaction boundary
+	int updateRatePerUnit(@Param("srchId") long id, @Param("revisedValue") double revisedValue);
 	
 	
 	
