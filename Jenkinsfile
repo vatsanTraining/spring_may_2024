@@ -13,7 +13,14 @@ pipeline {
                 sh "mvn -f /Users/srivatsan/.jenkins/workspace/test/hospital-service/pom.xml -Dmaven.test.failure.ignore=true clean package"
             }
         }
-            
+                    stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build -t vatsank/example-jenkins-build .'
+                }
+            }
+        }
+
         }
     }
 
