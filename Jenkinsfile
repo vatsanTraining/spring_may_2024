@@ -21,4 +21,3 @@ pipeline {
 
 
 
-mvn - f "...\\project\\pom.xml" clean test
