@@ -1,7 +1,6 @@
 package com.example.demo.utillity;
 
 import java.time.LocalDateTime;
-import java.util.logging.ErrorManager;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,7 +21,7 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public ErrorMessage handleOtherExceptions(Exception ex,WebRequest req) {
 		
-		return new ErrorMessage(ex.getMessage(),req.getDescription(false),LocalDateTime.now());
+		return new ErrorMessage(req.getDescription(false),ex.getMessage(),LocalDateTime.now());
 	}
 	
 }

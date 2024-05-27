@@ -12,7 +12,12 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.ifaces.ProductRepository;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+
 @SpringBootApplication
+
+@OpenAPIDefinition(info = @Info(title = "Product Service",version = "1.0"))
 public class ProductServiceApplication {
 
 	public static void main(String[] args) {
